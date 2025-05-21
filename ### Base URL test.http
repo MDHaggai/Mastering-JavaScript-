@@ -1,0 +1,51 @@
+### Base URL test
+GET http://localhost:3000
+
+### User Signup
+POST http://localhost:3000/api/signup
+Content-Type: application/json
+
+{
+    "firstName": "Test",
+    "lastName": "User",
+    "email": "testuser2@example.com",
+    "password": "password123",
+    "age": 25,
+    "dateOfBirth": "1998-01-15",
+    "phoneNumber": "1234567890"
+}
+
+### User Signin
+# @name login
+POST http://localhost:3000/api/signin
+Content-Type: application/json
+
+{
+    "email": "testuser2@example.com",
+    "password": "password123"
+}
+
+### Store auth token from the login response
+@authToken = {{login.response.body.token}}
+
+### Get Current User Profile
+GET http://localhost:3000/api/profile
+Authorization: Bearer {{authToken}}
+
+### Update User Profile
+PUT http://localhost:3000/api/profile
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+    "firstName": "Updated",
+    "lastName": "Name",
+    "bio": "This is my updated profile bio",
+    "age": 26,
+    "phoneNumber": "9876543210",
+    "dateOfBirth": "1998-01-15"
+}
+
+### Get User Profile by ID
+GET http://localhost:3000/api/profile/user123
+Authorization: Bearer {{authToken}}
